@@ -1,5 +1,9 @@
 # mpv-cut
 
+<p align="center">
+  <img alt="preview" src="./assets/demo.gif">
+</p>
+
 ## about
 
 The core functionality of this script is to very quickly cut videos losslessly in [mpv](https://mpv.io/installation/) as an alternative to [LosslessCut](https://github.com/mifi/lossless-cut).
