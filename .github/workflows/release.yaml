@@ -20,12 +20,15 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Move files into a folder
+        run: mkdir mpv-cut && mv -t mpv-cut main.lua make_cuts.js
+
       - name: Install zip
         run: sudo apt-get install -y zip
 
       - name: Create archive
         working-directory: ${{env.GITHUB_WORKSPACE}}
-        run: zip mpv-cut.zip main.lua make_cuts.js
+        run: zip -r mpv-cut.zip mpv-cut
 
       - name: Release
         uses: softprops/action-gh-release@v1
