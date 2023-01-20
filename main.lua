@@ -29,7 +29,7 @@ function cut_render()
 		args = args,
 	}, print_async_result)
 
-	log("rendered cuts")
+	log("Rendered cuts")
 end
 
 function cut_key()
@@ -46,17 +46,17 @@ function cut_set_start(start_time)
 	end
 
 	cuts[cut_key()]['start'] = start_time
-	log(string.format("[cut %d] set start time: %s", cut_index + 1, start_time))
+	log(string.format("[cut %d] Set start time: %.2fs", cut_index + 1, start_time))
 end
 
 function cut_set_end(end_time)
 	if cuts[cut_key()] == nil then
-		log('no start point found')
+		log('No start point found')
 		return
 	end
 
 	cuts[cut_key()]['end'] = end_time
-	log(string.format("[cut %d] set end time: %s", cut_index + 1, end_time))
+	log(string.format("[cut %d] Set end time: %.2fs", cut_index + 1, end_time))
 end
 
 mp.add_key_binding('g', "cut_set_start", function() cut_set_start(mp.get_property_number("time-pos")) end)

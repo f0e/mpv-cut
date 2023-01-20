@@ -87,8 +87,6 @@ async function main() {
       duration,
       '-i',
       inpath,
-      '-pix_fmt',
-      'yuv420p',
       '-c',
       'copy',
       '-avoid_negative_ts',
