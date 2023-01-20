@@ -29,13 +29,13 @@ In
 `%AppData%\Roaming\mpv\scripts` or `Users\user\scoop\persist\mpv\scripts` run:
 
 ```
-git clone https://github.com/f0e/mpv-cut.git"
+git clone "https://github.com/f0e/mpv-cut.git"
 ```
 
 ### Linux/MacOS
 
 ```
-git clone https://github.com/f0e/mpv-cut.git" ~/.config/mpv/scripts/mpv-cut
+git clone "https://github.com/f0e/mpv-cut.git" ~/.config/mpv/scripts/mpv-cut
 ```
 
 ## usage
