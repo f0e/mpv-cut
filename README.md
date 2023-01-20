@@ -2,7 +2,7 @@
 
 ## about
 
-The core functionality of this script is to very quickly cut videos losslessly with the help of the fantastic media player [mpv](https://mpv.io/installation/) as an alternative to [LosslessCut](https://github.com/mifi/lossless-cut).
+The core functionality of this script is to very quickly cut videos losslessly in [mpv](https://mpv.io/installation/) as an alternative to [LosslessCut](https://github.com/mifi/lossless-cut).
 
 I decided to modify [mpv-cut](https://github.com/familyfriendlymikey/mpv-cut) since I was looking for slightly different functionality to what the original script provided. Mainly I wanted to be able to adjust the start and end points of cuts.
 
