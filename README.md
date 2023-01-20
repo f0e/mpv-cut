@@ -23,20 +23,17 @@ Besides mpv, you must have the following in your PATH:
 
 ## installation
 
-### Windows
+Download [the latest release](https://github.com/f0e/mpv-cut/releases/latest) and move the folder in the zip into your mpv scripts folder.
 
-In
-`%AppData%\Roaming\mpv\scripts` or `Users\user\scoop\persist\mpv\scripts` run:
+| Platform            | Path                                                       |
+| ------------------- | ---------------------------------------------------------- |
+| **Windows**         | `%appdata%\Roaming\mpv\scripts\`                           |
+| **Windows (Scoop)** | `%userprofile%\scoop\persist\mpv\portable_config\scripts\` |
+| **Linux**/**MacOS** | `~/.config/mpv/scripts/`                                   |
 
-```
-git clone "https://github.com/f0e/mpv-cut.git"
-```
+After that, the next time you run mpv the script will be loaded.
 
-### Linux/MacOS
-
-```
-git clone "https://github.com/f0e/mpv-cut.git" ~/.config/mpv/scripts/mpv-cut
-```
+Note: mpv-cut should have its own folder inside your scripts folder. (`scripts/mpv-cut/main.lua & make_cuts.js`)
 
 ## usage
 
@@ -49,3 +46,13 @@ git clone "https://github.com/f0e/mpv-cut.git" ~/.config/mpv/scripts/mpv-cut
 If you want to change the start or end position of a cut you can press the keybind again. You can also create multiple cuts from a single video.
 
 Rendered cuts will be placed in the same directory as the source file.
+
+---
+
+## troubleshooting
+
+If the script doesn't work, you can try these steps.
+
+- Make sure the script is installed in the correct directory. You should end up with something like: `C:\Users\admin\scoop\persist\mpv\portable_config\scripts\mpv-cut\main.lua & make_cuts.js`.
+- Run mpv using the terminal (`mpv video.mp4`) and check the output, are there any errors?
+- Make sure you don't have multiple versions of mpv installed. You might have installed the script to the wrong version.

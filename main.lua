@@ -66,3 +66,5 @@ mp.add_key_binding('G', "cut_set_start_sof", function() cut_set_start(0) end)
 mp.add_key_binding('H', "cut_set_end_eof", function() cut_set_end(mp.get_property('duration')) end)
 
 mp.add_key_binding('r', "cut_render", cut_render)
+
+print("mpv-cut loaded")
