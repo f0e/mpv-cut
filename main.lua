@@ -12,6 +12,11 @@ function log(...)
 end
 
 function cut_render()
+	if cuts[cut_key()] == nil or cuts[cut_key()]['end'] == nil then
+		log("No cuts to render")
+		return
+	end
+	
 	local cuts_json = mp.utils.format_json(cuts)
 
 	local inpath = mp.get_property("path")
@@ -19,17 +24,22 @@ function cut_render()
 
 	local filename = mp.get_property("filename")
 
-	local args = { "node", MAKE_CUTS_SCRIPT_PATH, indir, filename, cuts_json }
-
 	print("making cut")
 
-	mp.command_native_async({
+	local args = { "node", MAKE_CUTS_SCRIPT_PATH, indir, filename, cuts_json }
+
+	res, err = mp.command_native({
 		name = "subprocess",
 		playback_only = false,
+		capture_stdout = true,
 		args = args,
-	}, print_async_result)
+	})
 
-	log("Rendered cuts")
+	if res then
+		log("Rendered cuts")
+	elseif err then
+		log("Failed to render cuts")
+	end
 end
 
 function cut_key()
@@ -59,6 +69,11 @@ function cut_set_end(end_time)
 	log(string.format("[cut %d] Set end time: %.2fs", cut_index + 1, end_time))
 end
 
+function on_file_change()
+	cuts = {}
+	cut_index = 0
+end
+
 mp.add_key_binding('g', "cut_set_start", function() cut_set_start(mp.get_property_number("time-pos")) end)
 mp.add_key_binding('h', "cut_set_end", function() cut_set_end(mp.get_property_number("time-pos")) end)
 
@@ -66,5 +81,7 @@ mp.add_key_binding('G', "cut_set_start_sof", function() cut_set_start(0) end)
 mp.add_key_binding('H', "cut_set_end_eof", function() cut_set_end(mp.get_property('duration')) end)
 
 mp.add_key_binding('r', "cut_render", cut_render)
+
+mp.register_event("end-file", on_file_change)
 
 print("mpv-cut loaded")
