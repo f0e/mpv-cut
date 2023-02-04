@@ -14,12 +14,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Bump version and push tag
-        id: tag_version
-        uses: mathieudutour/github-tag-action@v6.1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Move files into a folder
         run: mkdir mpv-cut && mv -t mpv-cut main.lua make_cuts.js
 
@@ -32,9 +26,7 @@ jobs:
 
       - name: Release
         uses: softprops/action-gh-release@v1
-        if: steps.tag_version.outputs.new_tag
         with:
-          tag_name: ${{ steps.tag_version.outputs.new_tag }}
           files: |
             mpv-cut.zip
           fail_on_unmatched_files: true
