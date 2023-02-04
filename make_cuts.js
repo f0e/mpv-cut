@@ -89,6 +89,8 @@ async function main() {
       inpath,
       '-c',
       'copy',
+      '-map',
+      '0',
       '-avoid_negative_ts',
       'make_zero',
       outpath,

@@ -53,6 +53,7 @@ Rendered cuts will be placed in the same directory as the source file.
 
 If the script doesn't work, you can try these steps.
 
+- Make sure all of the [requirements](#requirements) are installed
 - Make sure the script is installed in the correct directory. You should end up with something like: `C:\Users\admin\scoop\persist\mpv\portable_config\scripts\mpv-cut\main.lua & make_cuts.js`.
 - Run mpv using the terminal (`mpv video.mp4`) and check the output, are there any errors?
 - Make sure you don't have multiple versions of mpv installed. You might have installed the script to the wrong version.
