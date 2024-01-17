@@ -7,9 +7,15 @@ const plain = '\x1b[0m';
 const green = '\x1b[32m';
 const purple = '\x1b[34m';
 
+// https://stackoverflow.com/a/45242825
+const isSubdirectory = (parent, child) => {
+  const relative = path.relative(parent, child);
+  return relative && !relative.startsWith('..') && !path.isAbsolute(relative);
+};
+
 function quit(s) {
   console.log('' + red + s + ', quitting.' + plain + '\n');
-  return process.exit();
+  return process.exit(1);
 }
 
 function isDir(s) {
@@ -50,13 +56,20 @@ async function transferTimestamps(inPath, outPath, offset = 0) {
 async function main() {
   const argv = process.argv.slice(2);
 
-  const [dir, filename, cutsStr] = argv;
-  const cutsMap = JSON.parse(cutsStr);
+  const [indir, outdir_raw, filename, cutsStr] = argv;
 
-  if (!isDir(dir)) {
-    quit('Directory is invalid');
+  if (!isDir(indir)) quit('Input directory is invalid');
+
+  const outdir = path.join(indir, outdir_raw);
+
+  if (!isDir(outdir)) {
+    if (!isSubdirectory(indir, outdir)) quit('Output directory is invalid');
+
+    // the output directory is a child of the input directory, can assume it's safe to create
+    await fs.promises.mkdir(outdir, { recursive: true });
   }
 
+  const cutsMap = JSON.parse(cutsStr);
   const cuts = Object.values(cutsMap).sort((a, b) => a.start - b.start);
 
   for (const [i, cut] of cuts.entries()) {
@@ -75,8 +88,8 @@ async function main() {
       ')' +
       ext;
 
-    const inpath = path.join(dir, filename);
-    const outpath = path.join(dir, cutName);
+    const inpath = path.join(indir, filename);
+    const outpath = path.join(outdir, cutName);
 
     const cmd = 'ffmpeg';
     const args = [

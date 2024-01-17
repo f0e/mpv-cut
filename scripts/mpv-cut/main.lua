@@ -1,7 +1,14 @@
 mp.msg = require 'mp.msg'
 mp.utils = require "mp.utils"
+mp.options = require 'mp.options'
 
 MAKE_CUTS_SCRIPT_PATH = mp.utils.join_path(mp.get_script_directory(), "make_cuts")
+
+options = {
+	output_dir = "."
+}
+
+mp.options.read_options(options, "mpv-cut")
 
 cuts = {}
 cut_index = 0
@@ -20,14 +27,14 @@ function cut_render()
 	local cuts_json = mp.utils.format_json(cuts)
 
 	local inpath = mp.get_property("path")
-	local indir = mp.utils.split_path(inpath)
-
 	local filename = mp.get_property("filename")
 
-	print("making cut")
-	log("Rendering...")
+	local indir = mp.utils.split_path(inpath)
 
-	local args = { "node", MAKE_CUTS_SCRIPT_PATH, indir, filename, cuts_json }
+	log("Rendering...")
+	print("making cut")
+
+	local args = { "node", MAKE_CUTS_SCRIPT_PATH, indir, options.output_dir, filename, cuts_json }
 
 	res, err = mp.command_native({
 		name = "subprocess",
@@ -35,9 +42,9 @@ function cut_render()
 		args = args,
 	})
 
-	if res then
+	if res.status == 0 then
 		log("Rendered cuts")
-	elseif err then
+	else
 		log("Failed to render cuts")
 	end
 end
