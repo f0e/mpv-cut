@@ -60,7 +60,7 @@ async function main() {
 
   if (!isDir(indir)) quit('Input directory is invalid');
 
-  const outdir = path.join(indir, outdir_raw);
+  const outdir = path.resolve(indir, outdir_raw);
 
   if (!isDir(outdir)) {
     if (!isSubdirectory(indir, outdir)) quit('Output directory is invalid');
