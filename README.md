@@ -23,17 +23,23 @@ Besides mpv, you must have the following in your PATH:
 
 ## installation
 
-Download [the latest release](https://github.com/f0e/mpv-cut/releases/latest) and move the folder in the zip into your mpv scripts folder.
+Download [the latest release](https://github.com/f0e/mpv-cut/releases/latest) and move the folders in the zip into your mpv folder.
 
-| Platform            | Path                                                       |
-| ------------------- | ---------------------------------------------------------- |
-| **Windows**         | `%appdata%\Roaming\mpv\scripts\`                           |
-| **Windows (Scoop)** | `%userprofile%\scoop\persist\mpv\portable_config\scripts\` |
-| **Linux**/**MacOS** | `~/.config/mpv/scripts/`                                   |
+| Platform            | Path                                               |
+| ------------------- | -------------------------------------------------- |
+| **Windows**         | `%appdata%/Roaming/mpv/`                           |
+| **Windows (Scoop)** | `%userprofile%/scoop/persist/mpv/portable_config/` |
+| **Linux**/**MacOS** | `~/.config/mpv/scripts/`                           |
 
 After that, the next time you run mpv the script will be loaded.
 
 Note: mpv-cut should have its own folder inside your scripts folder. (`scripts/mpv-cut/main.lua & make_cuts.js`)
+
+## options
+
+`script-opts/mpv-cut.conf`:
+
+- `output_dir` - The output directory for clips, can be relative or absolute. Defaults to `.`, which will place clips in the same directory as the original video.
 
 ## usage
 

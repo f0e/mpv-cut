@@ -14,15 +14,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Move files into a folder
-        run: mkdir mpv-cut && mv -t mpv-cut scripts script-opts
-
       - name: Install zip
         run: sudo apt-get install -y zip
 
       - name: Create archive
         working-directory: ${{env.GITHUB_WORKSPACE}}
-        run: zip -r mpv-cut.zip mpv-cut
+        run: zip -r mpv-cut.zip scripts script-opts
 
       - name: Release
         uses: softprops/action-gh-release@v1
