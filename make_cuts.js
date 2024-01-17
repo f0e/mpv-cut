@@ -50,22 +50,22 @@ async function main() {
   const argv = process.argv.slice(2);
 
   const [dir, filename, cutsStr] = argv;
-  const cuts = JSON.parse(cutsStr);
+  const cutsMap = JSON.parse(cutsStr);
 
   if (!isDir(dir)) {
     quit('Directory is invalid');
   }
 
-  const numCuts = Object.keys(cuts).length;
+  const cuts = Object.values(cutsMap).sort((a, b) => a.start - b.start);
 
-  for (const [i, cut] of Object.values(cuts).entries()) {
+  for (const [i, cut] of cuts.entries()) {
     if (!('end' in cut)) continue;
 
     const { name: filename_noext, ext: ext } = path.parse(filename);
     const duration = parseFloat(cut.end) - parseFloat(cut.start);
 
     const cutName =
-      '(cut) ' +
+      `(cut${cuts.length == 1 ? '' : i + 1}) ` +
       filename_noext +
       ' (' +
       toHMS(cut.start) +
@@ -98,7 +98,7 @@ async function main() {
       outpath,
     ];
 
-    const progress = '(' + (i + 1) + '/' + numCuts + ')';
+    const progress = '(' + (i + 1) + '/' + cuts.length + ')';
     const cmdStr = '' + cmd + ' ' + args.join(' ');
 
     console.log(
