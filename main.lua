@@ -25,6 +25,7 @@ function cut_render()
 	local filename = mp.get_property("filename")
 
 	print("making cut")
+	log("Rendering...")
 
 	local args = { "node", MAKE_CUTS_SCRIPT_PATH, indir, filename, cuts_json }
 
