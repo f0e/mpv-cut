@@ -39,7 +39,11 @@ Note: mpv-cut should have its own folder inside your scripts folder. (`scripts/m
 
 `script-opts/mpv-cut.conf`:
 
-- `output_dir` - The output directory for clips, can be relative or absolute. Defaults to `.`, which will place clips in the same directory as the original video.
+- `output_dir` - The output directory for cuts, can be relative or absolute.
+  - Default value: `.` (will place cuts in the same directory as the original video)
+- `multi_cut_mode` - The mode for handling multiple cuts for a single video. Options:
+  - `separate`: create separate cut files (default)
+  - `join`: merge cut files into a single cut.
 
 ## usage
 
