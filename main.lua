@@ -32,7 +32,6 @@ function cut_render()
 	res, err = mp.command_native({
 		name = "subprocess",
 		playback_only = false,
-		capture_stdout = true,
 		args = args,
 	})
 
