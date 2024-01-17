@@ -21,15 +21,16 @@ function isDir(s) {
 }
 
 function toHMS(secs) {
-  return (
-    [
-      Math.floor(secs / 3600),
-      Math.floor((secs % 3600) / 60),
-      Math.round(((secs % 3600) % 60) * 1000) / 1000,
-    ]
-      .filter(Boolean)
-      .join('-') || 0
-  );
+  const hours = Math.floor(secs / 3600);
+  const minutes = Math.floor((secs % 3600) / 60);
+  const remainingSeconds = ((secs % 3600) % 60).toFixed(1);
+
+  const str = [];
+  if (hours > 0) str.push(`${hours}h`);
+  if (minutes > 0) str.push(`${minutes}m`);
+  if (remainingSeconds > 0) str.push(`${remainingSeconds}s`);
+
+  return str.length == 0 ? '0' : str.join('');
 }
 
 async function transferTimestamps(inPath, outPath, offset = 0) {
