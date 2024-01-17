@@ -21,13 +21,15 @@ function isDir(s) {
 }
 
 function toHMS(secs) {
-  return [
-    Math.floor(secs / 3600),
-    Math.floor((secs % 3600) / 60),
-    Math.round(((secs % 3600) % 60) * 1000) / 1000,
-  ]
-    .filter(Boolean)
-    .join('-');
+  return (
+    [
+      Math.floor(secs / 3600),
+      Math.floor((secs % 3600) / 60),
+      Math.round(((secs % 3600) % 60) * 1000) / 1000,
+    ]
+      .filter(Boolean)
+      .join('-') || 0
+  );
 }
 
 async function transferTimestamps(inPath, outPath, offset = 0) {
