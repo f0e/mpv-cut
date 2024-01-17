@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Move files into a folder
-        run: mkdir mpv-cut && mv -t mpv-cut main.lua make_cuts.js
+        run: mkdir mpv-cut && mv -t mpv-cut scripts script-opts
 
       - name: Install zip
         run: sudo apt-get install -y zip
