@@ -1,0 +1,35 @@
+{
+	"name": "mpv-cut",
+	"private": true,
+	"scripts": {
+		"postinstall": "husky install",
+
+		"build": "rollup --config rollup.config.ts --configPlugin typescript",
+		"dev": "npm run build -- --watch",
+
+		"check": "biome check --no-errors-on-unmatched --files-ignore-unknown=true .",
+		"fix": "npm run check -- --apply"
+	},
+	"lint-staged": {
+		"*": ["biome check --no-errors-on-unmatched --files-ignore-unknown=true"]
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.5.2",
+		"@rollup/plugin-commonjs": "^25.0.7",
+		"@rollup/plugin-node-resolve": "^15.2.3",
+		"@rollup/plugin-terser": "^0.4.4",
+		"@rollup/plugin-typescript": "^11.1.6",
+		"@types/fs-extra": "^11.0.4",
+		"@types/mpv-script": "^0.32.6",
+		"husky": "^8.0.3",
+		"lint-staged": "^15.2.0",
+		"rollup": "^4.9.5",
+		"rollup-plugin-cleanup": "^3.2.1",
+		"tslib": "^2.6.2",
+		"typescript": "^5.3.3"
+	},
+	"dependencies": {
+		"execa": "^8.0.1",
+		"fs-extra": "^11.2.0"
+	}
+}
