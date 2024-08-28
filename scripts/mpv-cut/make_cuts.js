@@ -94,8 +94,6 @@ async function renderCut(inpath, outpath, start, duration) {
   ];
 
   await ffmpeg(args);
-
-  await transferTimestamps(inpath, outpath);
 }
 
 async function mergeCuts(tempPath, filepaths, outpath) {
@@ -149,6 +147,7 @@ async function main() {
 
   const { name: filename_noext, ext: ext } = path.parse(filename);
 
+  const inpath = path.join(indir, filename);
   const outpaths = [];
 
   for (const [i, cut] of cuts.entries()) {
@@ -166,7 +165,6 @@ async function main() {
       ')' +
       ext;
 
-    const inpath = path.join(indir, filename);
     const outpath = path.join(outdir, cutName);
 
     const progress = '(' + (i + 1) + '/' + cuts.length + ')';
@@ -177,6 +175,8 @@ async function main() {
     console.log('' + outpath + '\n');
 
     await renderCut(inpath, outpath, cut.start, duration);
+    await transferTimestamps(inpath, outpath);
+
     outpaths.push(outpath);
   }
 
@@ -185,6 +185,7 @@ async function main() {
     const outpath = path.join(outdir, cutName);
 
     await mergeCuts(indir, outpaths, outpath);
+    await transferTimestamps(inpath, outpath);
   }
 
   return console.log('Done.\n');
